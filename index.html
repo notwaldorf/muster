@@ -27,34 +27,15 @@
 
   // Hurray for globals
   var w = 600, h = 300;
-  var svg;
-  var circle1, circle2;
-  var textures;
-
-  svg = createSVG();
-  circle1 = createCircle(0);
-  circle2 = createCircle(1);
-
-  textures = createTextures();
+  var svg = createSVG();
+  var circle1 = createCircle(0);
+  var circle2 = createCircle(1);
+  var textures = createTextures();
   input1.max = input2.max = textures.length - 1;
 
-  // Default values
-  fillWithTexture(circle1, 1);
-  input1.value = 1;
-  fillWithTexture(circle2, 0);
+  loadOrResetState();
 
-  // Maybe we saved some values?
-  if (window.location.hash !== '') {
-    var applied = window.location.hash.split('#')[1].split('&');
-
-    if (applied.length == 2 && parseInt(applied[0]) && parseInt(applied[1])) {
-      fillWithTexture(circle1, applied[0]);
-      input1.value = applied[0];
-      fillWithTexture(circle2, applied[1]);
-      input1.value = applied[1];
-    }
-  }
-
+  // Add Listeners
   input1.addEventListener('input', function(){
     fillWithTexture(circle1, input1.value);
     window.location.hash = input1.value + '&' + input2.value;
@@ -63,7 +44,6 @@
     fillWithTexture(circle2, input2.value);
     window.location.hash = input1.value + '&' + input2.value;
   });
-
 
   function fillWithTexture(c, t) {
     svg.call(textures[t]);
@@ -253,6 +233,29 @@
         horizontal, vertical, grid, grid2, diagonal, diagonalGrid, diagonalGrid2,
         dots, dots1, dots2, dots21, dots3, dots33, dots4, dots44, dots5, dots6,
         hexes, exes, exes2, woven, waves, squares];
+  }
+
+  function loadOrResetState() {
+    var didAThing = false;
+
+    // Maybe we saved some values?
+    if (window.location.hash !== '') {
+      var applied = window.location.hash.split('#')[1].split('&');
+      if (applied.length == 2 && parseInt(applied[0]) && parseInt(applied[1])) {
+        fillWithTexture(circle1, applied[0]);
+        input1.value = applied[0];
+        fillWithTexture(circle2, applied[1]);
+        input1.value = applied[1];
+        didAThing = true;
+      }
+    }
+
+    // We didn't load anything, use the defaults
+    if (!didAThing) {
+      fillWithTexture(circle1, 1);
+      input1.value = 1;
+      fillWithTexture(circle2, 0);
+    }
   }
 </script>
 </html>
