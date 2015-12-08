@@ -19,6 +19,7 @@
   ],
   "dependencies": {
     "d3": "~3.5.10",
-    "textures": "*"
+    "textures": "*",
+    "paper-slider": "polymerelements/paper-slider#~1.0.8"
   }
 }

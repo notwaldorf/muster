@@ -1,0 +1,92 @@
+h1 {
+  font-size: 80px;
+  font-family: Amatic SC;
+  font-weight: normal;
+  margin: 0px;
+  text-align: center;
+}
+
+.container {
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.horizontal {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.playground {
+  width: 100%;
+  margin: 20px 0;
+  position: relative;
+}
+
+#svg {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+paper-slider {
+  width: 50%;
+}
+
+/* Giant Hack alert. This only works in the Shady DOM,
+and it's incredibly gross. */
+
+paper-slider #sliderContainer {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.slider-spacer {
+  width: 8px;
+  height: 4px;
+  margin-top: 15px;
+}
+
+.button:link, .button:visited {
+  font-size: 30px;
+  font-family: Amatic SC, Lato, sans-serif;
+  color: black;
+  cursor: pointer;
+  padding: 0 10px;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: black;
+  color: white;
+}
+
+.footer {
+  font-family: Lato, sans-serif;
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 2px solid darkorange;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.footer p {
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: .2em;
+  padding-right: 6px;
+}
+
+.footer a:link, a:visited {
+  color: darkorange;
+}
+
+.heart {
+  color: darkorange;
+}
