@@ -36,7 +36,7 @@ input[type=range] {
 
 .button:link, .button:visited {
   font-size: 30px;
-  font-family: Amatic SC;
+  font-family: Amatic SC, Lato, sans-serif;
   color: black;
   cursor: pointer;
   padding: 0 10px;
@@ -46,4 +46,28 @@ input[type=range] {
 .button:hover {
   background-color: black;
   color: white;
+}
+
+.footer {
+  font-family: Lato, sans-serif;
+  margin-top: 50px;
+  padding-top: 20px;
+  border-top: 2px solid darkorange;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.footer p {
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: .2em;
+  padding-right: 6px;
+}
+
+.footer a:link, a:visited {
+  color: darkorange;
+}
+
+.heart {
+  color: darkorange;
 }
