@@ -261,11 +261,11 @@
     // Maybe we saved some values?
     if (window.location.hash !== '') {
       var applied = window.location.hash.split('#')[1].split('&');
-      if (applied.length == 2 && parseInt(applied[0]) && parseInt(applied[1])) {
+      if (applied.length == 2 && !isNaN(parseInt(applied[0])) && !isNaN(parseInt(applied[1]))) {
         fillWithTexture(circle1, applied[0]);
         input1.value = applied[0];
         fillWithTexture(circle2, applied[1]);
-        input1.value = applied[1];
+        input2.value = applied[1];
         didAThing = true;
       }
     }
