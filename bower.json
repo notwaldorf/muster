@@ -1,10 +1,10 @@
 {
-  "name": "geometric-patterns-book",
+  "name": "muster",
   "version": "0.0.0",
   "authors": [
     "Monica Dinculescu <noms@google.com>"
   ],
-  "description": "",
+  "description": "A webapp that lets you play with overlapping patterns",
   "main": "",
   "moduleType": [],
   "license": "MIT",
