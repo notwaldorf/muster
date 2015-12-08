@@ -41,11 +41,14 @@
 <script>
   var strokeColor = "darkorange";
 
-  // Hurray for globals
-  var w = 350, h = 300;
+  // Hurray for globals and magic numbers that I have no idea if they're right.
+  // TODO(future me): Check this midnight math out.
+  var w = window.innerWidth < 400 ? 290 : 390;
+  var r = (w - 2 * 50 /* the overlap */) / 2;
+  var h = 300;
   var svg = createSVG();
-  var circle1 = createCircle(0);
-  var circle2 = createCircle(1);
+  var circle1 = createCircle(0, r, 50);
+  var circle2 = createCircle(1, r, 50);
   var textures = createTextures();
   input1.max = input2.max = textures.length - 1;
 
@@ -74,13 +77,14 @@
     return svg;
   }
 
-  function createCircle(i) {
+  function createCircle(i, r, overlap) {
     // Create the shape
+    var offset = (w - 2*r - overlap) / 2;
     var circle = svg.append("circle")
       .attr({
-          "cx": 150 + 50 * i,
+          "cx": offset + r + overlap * i,
           "cy": h/2,
-          "r": 140,
+          "r": r,
           id: 'circle' + i
       })
       .style({
