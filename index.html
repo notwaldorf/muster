@@ -17,8 +17,8 @@
 <body>
   <div class="container">
     <h1>Let's mix patterns!</h1>
-    <div class="playground">
 
+    <div class="playground">
       <div class="input-container">
         <input id="input1" type="range" value="0" step="1" max="10" class="ugh">
       </div>
@@ -29,8 +29,13 @@
         <input id="input2" type="range" value="0" step="1" max="10" class="ugh">
       </div>
     </div>
-    <a href="" class="button" id="reset">Reset</a>
 
+    <div class="playground">
+      <a href="" class="button" id="randomLeft">Random</a>
+      <a href="" class="button" id="reset">Reset</a>
+      <a href="" class="button" id="randomRight">Random</a>
+    </div>
+    
     <div class="footer">
       <p>made with <span class="heart">❤︎</span> by <a href="https://twitter.com/notwaldorf">monica</a>
         using <a href="https://riccardoscalco.github.io/textures/">textures.js</a>.
@@ -54,16 +59,9 @@
   input1.max = input2.max = textures.length - 1;
 
   loadOrResetState();
+  setupListeners();
 
-  // Add Listeners
-  input1.addEventListener('input', function(){
-    fillWithTexture(circle1, input1.value);
-    window.location.hash = input1.value + '&' + input2.value;
-  });
-  input2.addEventListener('input', function(){
-    fillWithTexture(circle2, input2.value);
-    window.location.hash = input1.value + '&' + input2.value;
-  });
+
 
   function fillWithTexture(c, t) {
     svg.call(textures[t]);
@@ -381,6 +379,31 @@
       input1.value = 1;
       fillWithTexture(circle2, 0);
     }
+  }
+
+  function setupListeners() {
+    // Add Listeners
+    function updateLeft() {
+      fillWithTexture(circle1, input1.value);
+      window.location.hash = input1.value + '&' + input2.value;
+    }
+    function updateRight() {
+      fillWithTexture(circle2, input2.value);
+      window.location.hash = input1.value + '&' + input2.value;
+    }
+    input1.addEventListener('input', updateLeft);
+    input2.addEventListener('input', updateRight)
+
+    randomLeft.addEventListener('click', function() {
+      input1.value = Math.floor((Math.random() * textures.length));
+      updateLeft();
+      event.preventDefault();
+    });
+    randomRight.addEventListener('click', function() {
+      input2.value = Math.floor((Math.random() * textures.length));
+      updateRight();
+      event.preventDefault();
+    });
   }
 </script>
 </html>
