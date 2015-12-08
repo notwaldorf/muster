@@ -421,6 +421,13 @@
       updateRight(e.srcElement.immediateValue);
     });
 
+    input1.addEventListener('change', function(e) {
+      updateLeft(input1.value);
+    });
+    input2.addEventListener('change', function(e) {
+      updateRight(input2.value);
+    });
+
     random.addEventListener('click', function(event) {
       input1.value = Math.floor((Math.random() * textures.length));
       input2.value = Math.floor((Math.random() * textures.length));
