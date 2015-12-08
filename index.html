@@ -35,10 +35,10 @@
 
   input1.max = input2.max = textures.length - 1;
 
-  input1.addEventListener('change', function(){
+  input1.addEventListener('input', function(){
     fillWithTexture(circle1, input1.value)
   });
-  input2.addEventListener('change', function(){
+  input2.addEventListener('input', function(){
     fillWithTexture(circle2, input2.value)
   });
 
