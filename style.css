@@ -18,7 +18,7 @@ h1 {
   position: relative;
 }
 
-input[type=range][orient=vertical] {
+input[type=range] {
   writing-mode: bt-lr; /* IE */
   -webkit-appearance: slider-vertical; /* WebKit */
   width: 8px;
