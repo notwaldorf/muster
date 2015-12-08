@@ -39,7 +39,8 @@
   </div>
 </body>
 <script>
-  var strokeColor = "darkorange";
+  var strokeColor = "rgb(255, 140, 0)";
+  var backgroundColor = "rgba(255, 140, 0, 0.6)";
 
   // Hurray for globals and magic numbers that I have no idea if they're right.
   // TODO(future me): Check this midnight math out.
@@ -126,13 +127,28 @@
       .shapeRendering("crispEdges")
       .stroke(strokeColor);
 
-    var grid2 = textures.lines()
+    var gridInv = textures.lines()
       .orientation("vertical", "horizontal")
       .size(10)
       .strokeWidth(1)
       .shapeRendering("crispEdges")
       .stroke("white")
-      .background(strokeColor);
+      .background(backgroundColor);
+
+    var gridLarger = textures.lines()
+      .orientation("vertical", "horizontal")
+      .size(20)
+      .strokeWidth(1)
+      .shapeRendering("crispEdges")
+      .stroke(strokeColor);
+
+    var gridLargerInv = textures.lines()
+      .orientation("vertical", "horizontal")
+      .size(20)
+      .strokeWidth(1)
+      .shapeRendering("crispEdges")
+      .stroke("white")
+      .background(backgroundColor);
 
     var diagonalGrid = textures.lines()
       .orientation("2/8", "6/8")
@@ -141,13 +157,28 @@
       .shapeRendering("crispEdges")
       .stroke(strokeColor);
 
-    var diagonalGrid2 = textures.lines()
+    var diagonalGridInv = textures.lines()
       .orientation("2/8", "6/8")
       .size(10)
       .strokeWidth(1)
       .stroke("white")
       .shapeRendering("crispEdges")
-      .background(strokeColor);
+      .background(backgroundColor);
+
+    var diagonalGridLarger = textures.lines()
+      .orientation("2/8", "6/8")
+      .size(20)
+      .strokeWidth(1)
+      .shapeRendering("crispEdges")
+      .stroke(strokeColor);
+
+    var diagonalGridLargerInv = textures.lines()
+      .orientation("2/8", "6/8")
+      .size(20)
+      .strokeWidth(1)
+      .stroke("white")
+      .shapeRendering("crispEdges")
+      .background(backgroundColor);
 
     var dots = textures
       .circles()
@@ -155,35 +186,64 @@
       .fill(strokeColor)
       .stroke(strokeColor);
 
+    var dotsInv = textures
+      .circles()
+      .thicker()
+      .fill("white")
+      .stroke("white")
+      .background(backgroundColor);
+
     var dots1 = textures
       .circles()
       .complement()
       .fill(strokeColor)
       .stroke(strokeColor);
 
+    var dots1Inv = textures
+      .circles()
+      .complement()
+      .fill("white")
+      .stroke("white")
+      .background(backgroundColor);
+
     var dots2 = textures
       .circles()
       .fill(strokeColor)
       .stroke(strokeColor)
-      .size(6);
+      .size(8);
+
+    var dots2Inv = textures
+      .circles()
+      .fill("white")
+      .stroke("white")
+      .size(8)
+      .background(backgroundColor);
 
     var dots21 = textures
       .circles()
       .fill(strokeColor)
       .stroke(strokeColor)
       .complement()
-      .size(8);
+      .size(10);
+
+    var dots21Inv = textures
+      .circles()
+      .fill("white")
+      .stroke("white")
+      .complement()
+      .background(backgroundColor)
+      .size(10);
 
     var dots3 = textures.circles()
     .radius(4)
-    .fill("transparent")
+    .fill("white")
     .strokeWidth(2)
     .stroke(strokeColor);
 
     var dots33 = textures.circles()
       .radius(4)
       .complement()
-      .fill("transparent")
+      .fill("white")
       .strokeWidth(2)
       .stroke(strokeColor);
 
@@ -205,7 +265,7 @@
       .fill(strokeColor)
       .strokeWidth(2)
       .stroke("white")
-      .background(strokeColor);
+      .background(backgroundColor);
 
     var dots6 = textures.circles()
       .radius(4)
@@ -213,7 +273,8 @@
       .strokeWidth(2)
       .stroke("white")
       .complement()
-      .background(strokeColor);
+      .background(backgroundColor);
+
 
     var hexes = textures.paths()
       .d("hexagons")
@@ -227,11 +288,11 @@
       .thicker()
       .stroke(strokeColor);
 
-    var exes2 = textures.paths()
+    var exesInv = textures.paths()
       .d("crosses")
       .lighter()
       .thicker()
-      .background(strokeColor)
+      .background(backgroundColor)
       .stroke("white");
 
     var woven = textures.paths()
@@ -250,9 +311,11 @@
       .stroke(strokeColor);
 
     return [empty,
-        horizontal, vertical, grid, grid2, diagonal, diagonalGrid, diagonalGrid2,
+        horizontal, vertical, grid, gridInv, gridLarger, gridLargerInv,
+        diagonal, diagonalGrid, diagonalGridInv, diagonalGridLarger, diagonalGridLargerInv,
         dots, dots1, dots2, dots21, dots3, dots33, dots4, dots44, dots5, dots6,
-        hexes, exes, exes2, woven, waves, squares];
+        dotsInv, dots1Inv, dots2Inv, dots21Inv,
+        hexes, exes, exesInv, woven, waves, squares];
   }
 
   function loadOrResetState() {
