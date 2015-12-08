@@ -21,7 +21,9 @@ h1 {
   -ms-flex-direction: row;
   -webkit-flex-direction: row;
   flex-direction: row;
-  justify-content: space-between;
+  -ms-flex-pack: around;
+  -webkit-justify-content: space-around;
+  justify-content: space-around
 }
 
 .playground {
@@ -53,6 +55,11 @@ paper-slider #sliderContainer {
   margin-top: 15px;
 }
 
+.buttons {
+  width: 250px;
+  margin-left: auto;
+  margin-right: auto;
+}
 .button:link, .button:visited {
   font-size: 30px;
   font-family: Amatic SC, Lato, sans-serif;
