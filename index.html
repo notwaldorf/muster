@@ -12,14 +12,22 @@
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Amatic+SC:700">
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:400">
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="slider.css">
 </head>
 <body>
   <div class="container">
     <h1>Let's mix patterns!</h1>
     <div class="playground">
-      <input id="input1" type="range" value="0" step="1" max="10" orient="vertical">
-      <div id="example"></div>
-      <input id="input2" type="range" value="0" step="1" max="10" orient="vertical">
+
+      <div class="input-container">
+        <input id="input1" type="range" value="0" step="1" max="10" class="ugh">
+      </div>
+
+      <div id="svg"></div>
+
+      <div class="input-container flip">
+        <input id="input2" type="range" value="0" step="1" max="10" class="ugh">
+      </div>
     </div>
     <a href="" class="button" id="reset">Reset</a>
 
@@ -34,7 +42,7 @@
   var strokeColor = "darkorange";
 
   // Hurray for globals
-  var w = 600, h = 300;
+  var w = 350, h = 300;
   var svg = createSVG();
   var circle1 = createCircle(0);
   var circle2 = createCircle(1);
@@ -59,7 +67,7 @@
   }
 
   function createSVG() {
-    var svg = d3.select("#example")
+    var svg = d3.select("#svg")
         .append("svg")
         .attr("width",w)
         .attr("height", h);
@@ -70,7 +78,7 @@
     // Create the shape
     var circle = svg.append("circle")
       .attr({
-          "cx": 200 + 50 * i,
+          "cx": 150 + 50 * i,
           "cy": h/2,
           "r": 140,
           id: 'circle' + i

@@ -15,23 +15,38 @@ h1 {
 }
 
 .playground {
+  width: 100%;
   margin: 20px 0;
   position: relative;
-  text-align: left;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
 }
 
-input[type=range] {
-  writing-mode: bt-lr; /* IE */
-  -webkit-appearance: slider-vertical; /* WebKit */
-  width: 8px;
-  height: 200px;
-  padding: 0 5px;
-  position: absolute;
-  top: 50px;
+.input-container {
+  width: 65px;
+  display: block;
+  position: relative;
 }
 
-#input2 {
-  left: 450px;
+#input1, #input2 {
+  transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  transform-origin: 140px 140px;
+}
+
+.flip {
+  transform: scaleX(-1);
+  -moz-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 .button:link, .button:visited {
