@@ -60,13 +60,33 @@ paper-slider #sliderContainer {
   margin-left: auto;
   margin-right: auto;
 }
-.button:link, .button:visited {
+
+@media screen and (max-width:500px) {
+  h1 {
+    font-size: 50px;
+  }
+  .container {
+    max-width: 440px;
+  }
+  .playground {
+    margin: 0;
+  }
+  .buttons {
+    margin-top: 20px;
+  }
+}
+
+.button {
   font-size: 30px;
   font-family: Amatic SC, Lato, sans-serif;
-  color: black;
   cursor: pointer;
   padding: 0 10px;
   text-decoration: none;
+}
+
+.button:link, .button:visited, .button:focus {
+  background-color: white;
+  color: black;
 }
 
 .button:hover {

@@ -68,9 +68,9 @@
 
   // Hurray for globals and magic numbers that I have no idea if they're right.
   // TODO(future me): Check this midnight math out.
-  var w = window.innerWidth < 400 ? 290 : 390;
+  var w = window.innerWidth < 500 ? 290 : 390;
   var r = (w - 2 * 50 /* the overlap */) / 2;
-  var h = 300;
+  var h = window.innerWidth < 500 ? 250 : 300;
   document.getElementById('svg').style.width = w;
   var svg = createSVG();
   var circle1 = createCircle(0, r, 50);
@@ -423,6 +423,7 @@
 
     input1.addEventListener('change', function(e) {
       updateLeft(input1.value);
+      console.log('change');
     });
     input2.addEventListener('change', function(e) {
       updateRight(input2.value);
@@ -433,6 +434,8 @@
       input2.value = Math.floor((Math.random() * textures.length));
       updateLeft(input1.value);
       updateRight(input2.value);
+      // On mobile the link stays hovered after being clicked
+      this.className = 'button';
       event.preventDefault();
     });
   }
