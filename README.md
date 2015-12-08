@@ -1,6 +1,6 @@
 # /muster/
 
-Pronunciation: /ˈmʊstɐ/
+Pronunciation: [/ˈmʊstɐ/](https://translate.google.com/#de/en/muster)
 
 Translation: pattern (from German)
 
@@ -15,6 +15,6 @@ It looks like this, and is built with [textures.js](https://riccardoscalco.githu
 The selected patterns are reflected in the URL hash, so you can save and share your patterns!
 
 # <3
-Muster away!
+You muster send me your patterns!
 
-
+(I'm sorry. I'll let myself out now.)
