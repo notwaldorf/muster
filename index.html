@@ -17,7 +17,7 @@
 </body>
 
 <script>
-  var w = 200, h = 200;
+  var w = 600, h = 300;
 
   var svg;
   var circle1, circle2;
@@ -26,8 +26,8 @@
   svg = createSVG();
   textures = createTextures();
 
-  circle1 = createCircle(1);
-  circle2 = createCircle(2);
+  circle1 = createCircle(0);
+  circle2 = createCircle(1);
 
   fillWithTexture(circle1, 1);
   input1.value = 1;
@@ -60,9 +60,9 @@
     // Create the shape
     var circle = svg.append("circle")
       .attr({
-          "cx": w/2,
+          "cx": 200 + 50 * i,
           "cy": h/2,
-          "r": w/2-10,
+          "r": 140,
           id: 'circle' + i
       })
       .style({
@@ -122,15 +122,18 @@
     var dots = textures
       .circles()
       .thicker()
+      .fill("darkorange")
       .stroke("darkorange");
 
     var dots1 = textures
       .circles()
       .complement()
+      .fill("darkorange")
       .stroke("darkorange");
 
     var dots2 = textures
       .circles()
+      .fill("darkorange")
       .stroke("darkorange")
       .size(5);
 
@@ -170,7 +173,8 @@
     var woven = textures.paths()
       .d("woven")
       .lighter()
-      .thicker();
+      .thicker()
+      .stroke("darkorange");
 
     var waves = textures.paths()
       .d("waves")
