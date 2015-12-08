@@ -9,50 +9,31 @@
   <meta charset="utf-8">
   <script src="bower_components/d3/d3.min.js"></script>
   <script src="bower_components/textures/textures.min.js"></script>
-  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="bower_components/paper-slider/paper-slider.html">
-
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Amatic+SC:700">
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:400">
-  <link rel="stylesheet" type="text/css" href="style-new.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="slider.css">
 </head>
-
-<style is="custom-style">
-#input1 {
-  --paper-slider-active-color: #2196F3;
-  --paper-slider-knob-color: #2196F3;
-  --paper-slider-knob-start-color: #2196F3;
-  --paper-slider-knob-start-border-color: #2196F3;
-  --paper-progress-container-color: #2196F3;
-  --paper-slider-height: 4px;
-}
-#input2 {
-  --paper-slider-active-color: darkorange;
-  --paper-slider-knob-color: darkorange;
-  --paper-slider-knob-start-color: darkorange;
-  --paper-slider-knob-start-border-color: darkorange;
-  --paper-progress-container-color: darkorange;
-  --paper-slider-height: 4px;
-}
-</style>
-<body unresolved>
+<body>
   <div class="container">
     <h1>Let's mix patterns!</h1>
 
     <div class="playground horizontal">
+      <div class="input-container">
+        <input id="input1" type="range" value="0" step="1" max="10" class="ugh">
+      </div>
+
       <div id="svg"></div>
+
+      <div class="input-container flip">
+        <input id="input2" type="range" value="0" step="1" max="10" class="ugh">
+      </div>
     </div>
 
-    <div class="horizontal">
-      <paper-slider id="input1" value="0" step="1" max="10"></paper-slider>
-      <div class="slider-spacer" style="background-color: #2196F3;"></div>
-      <div class="slider-spacer" style="background-color: darkorange;"></div>
-      <paper-slider id="input2" value="0" step="1" max="10"></paper-slider>
-    </div>
-
-    <div class="horizontal">
-      <a href="" class="button" id="random">Random</a>
+    <div class="playground horizontal">
+      <a href="" class="button" id="randomLeft">Random</a>
       <a href="" class="button" id="reset">Reset</a>
+      <a href="" class="button" id="randomRight">Random</a>
     </div>
 
     <div class="footer">
@@ -71,7 +52,6 @@
   var w = window.innerWidth < 400 ? 290 : 390;
   var r = (w - 2 * 50 /* the overlap */) / 2;
   var h = 300;
-  document.getElementById('svg').style.width = w;
   var svg = createSVG();
   var circle1 = createCircle(0, r, 50);
   var circle2 = createCircle(1, r, 50);
@@ -80,6 +60,7 @@
 
   loadOrResetState();
   setupListeners();
+
 
 
   function fillWithTexture(c, t) {
@@ -405,27 +386,31 @@
   }
 
   function setupListeners() {
-    function updateLeft(value) {
-      fillWithTexture(circle1, value);
-      window.location.hash = value + '&' + input2.value;
+    function updateLeft() {
+      fillWithTexture(circle1, input1.value);
+      window.location.hash = input1.value + '&' + input2.value;
     }
-    function updateRight(value) {
-      fillWithTexture(circle2, value);
-      window.location.hash = input1.value + '&' + value;
+    function updateRight() {
+      fillWithTexture(circle2, input2.value);
+      window.location.hash = input1.value + '&' + input2.value;
     }
 
-    input1.addEventListener('immediate-value-change', function(e) {
-      updateLeft(e.srcElement.immediateValue);
-    });
-    input2.addEventListener('immediate-value-change', function(e) {
-      updateRight(e.srcElement.immediateValue);
-    });
+    input1.addEventListener('input', updateLeft);
+    input2.addEventListener('input', updateRight)
 
-    random.addEventListener('click', function(event) {
+    // The input event is broken for input type=range in IE10
+    // (because why not), so fallback to change. Thanks IE10.
+    input1.addEventListener('change', updateLeft);
+    input2.addEventListener('change', updateRight)
+
+    randomLeft.addEventListener('click', function(event) {
       input1.value = Math.floor((Math.random() * textures.length));
+      updateLeft();
+      event.preventDefault();
+    });
+    randomRight.addEventListener('click', function(event) {
       input2.value = Math.floor((Math.random() * textures.length));
-      updateLeft(input1.value);
-      updateRight(input2.value);
+      updateRight();
       event.preventDefault();
     });
   }

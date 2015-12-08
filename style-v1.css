@@ -14,7 +14,10 @@ h1 {
   text-align: center;
 }
 
-.horizontal {
+.playground {
+  width: 100%;
+  margin: 20px 0;
+  position: relative;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
@@ -24,33 +27,27 @@ h1 {
   justify-content: space-between;
 }
 
-.playground {
-  width: 100%;
-  margin: 20px 0;
+.input-container {
+  width: 40px;
+  display: block;
   position: relative;
 }
 
-#svg {
-  margin-left: auto;
-  margin-right: auto;
+#input1, #input2 {
+  transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  transform-origin: 140px 140px;
 }
 
-paper-slider {
-  width: 50%;
-}
-
-/* Giant Hack alert. This only works in the Shady DOM,
-and it's incredibly gross. */
-
-paper-slider #sliderContainer {
-  margin-left: 0px !important;
-  margin-right: 0px !important;
-}
-
-.slider-spacer {
-  width: 8px;
-  height: 4px;
-  margin-top: 15px;
+.flip {
+  transform: scaleX(-1);
+  -moz-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  transform: scaleX(-1);
 }
 
 .button:link, .button:visited {
