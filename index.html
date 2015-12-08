@@ -25,6 +25,7 @@
 <script>
   var strokeColor = "darkorange";
 
+  // Hurray for globals
   var w = 600, h = 300;
   var svg;
   var circle1, circle2;
@@ -37,19 +38,30 @@
   textures = createTextures();
   input1.max = input2.max = textures.length - 1;
 
-
+  // Default values
   fillWithTexture(circle1, 1);
   input1.value = 1;
   fillWithTexture(circle2, 0);
 
+  // Maybe we saved some values?
+  if (window.location.hash !== '') {
+    var applied = window.location.hash.split('#')[1].split('&');
+
+    if (applied.length == 2 && parseInt(applied[0]) && parseInt(applied[1])) {
+      fillWithTexture(circle1, applied[0]);
+      input1.value = applied[0];
+      fillWithTexture(circle2, applied[1]);
+      input1.value = applied[1];
+    }
+  }
 
   input1.addEventListener('input', function(){
     fillWithTexture(circle1, input1.value);
-    window.location.hash = 'bottom=' + input1.value + '&top=' + input2.value;
+    window.location.hash = input1.value + '&' + input2.value;
   });
   input2.addEventListener('input', function(){
     fillWithTexture(circle2, input2.value);
-    window.location.hash = 'bottom=' + input1.value + '&top=' + input2.value;
+    window.location.hash = input1.value + '&' + input2.value;
   });
 
 
