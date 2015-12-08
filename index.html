@@ -422,11 +422,15 @@
     });
 
     input1.addEventListener('change', function(e) {
-      updateLeft(input1.value);
-      console.log('change');
+      // Only update if the value is different.
+      if (window.location.hash !== '#' + input1.value + '&' + input2.value) {
+        updateLeft(input1.value);
+      }
     });
     input2.addEventListener('change', function(e) {
-      updateRight(input2.value);
+      if (window.location.hash !== '#' + input1.value + '&' + input2.value) {
+        updateRight(input2.value);
+      }
     });
 
     random.addEventListener('click', function(event) {
