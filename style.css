@@ -1,0 +1,33 @@
+h1 {
+  font-size: 80px;
+  font-family: Amatic SC;
+  font-weight: normal;
+  margin: 0px;
+  text-align: center;
+}
+
+.container {
+  width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+}
+
+.playground {
+  margin-top: 20px;
+  position: relative;
+}
+
+input[type=range][orient=vertical] {
+  writing-mode: bt-lr; /* IE */
+  -webkit-appearance: slider-vertical; /* WebKit */
+  width: 8px;
+  height: 200px;
+  padding: 0 5px;
+  position: absolute;
+  top: 50px;
+}
+
+#input2 {
+  left: 450px;
+}

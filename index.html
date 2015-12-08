@@ -9,13 +9,19 @@
 
   <script src="bower_components/d3/d3.min.js"></script>
   <script src="bower_components/textures/textures.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700">
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-  <input id="input1" type="range" value="0" step="1" max="10">
-  <input id="input2" type="range" value="0" step="1" max="10">
-  <div id="example"></div>
+  <div class="container">
+    <h1>Patterns! </h1>
+    <div class="playground">
+      <input id="input1" type="range" value="0" step="1" max="10" orient="vertical">
+      <div id="example"></div>
+      <input id="input2" type="range" value="0" step="1" max="10" orient="vertical">
+    </div>
+  </div>
 </body>
-
 <script>
   var w = 600, h = 300;
 
@@ -135,7 +141,14 @@
       .circles()
       .fill("darkorange")
       .stroke("darkorange")
-      .size(5);
+      .size(6);
+
+    var dots21 = textures
+      .circles()
+      .fill("darkorange")
+      .stroke("darkorange")
+      .complement()
+      .size(8);
 
     var dots3 = textures.circles()
     .radius(4)
@@ -187,7 +200,7 @@
 
     return [empty,
         horizontal, vertical, grid, diagonal, diagonalGrid, fireGrid,
-        dots, dots1, dots2, dots3, dots4, dots5,
+        dots, dots1, dots2, dots21, dots3, dots4, dots5,
         hexes, exes, woven, waves, squares];
   }
   //
