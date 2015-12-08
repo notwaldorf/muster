@@ -95,7 +95,11 @@
   }
 
   function createTextures() {
-    var empty = textures.lines().size(0).strokeWidth(0).background("white");
+    var empty = textures.lines()
+      .size(0)
+      .strokeWidth(0)
+      .background("white")
+      .stroke("white");
 
     var vertical = textures.lines()
         .orientation("vertical")
@@ -382,7 +386,6 @@
   }
 
   function setupListeners() {
-    // Add Listeners
     function updateLeft() {
       fillWithTexture(circle1, input1.value);
       window.location.hash = input1.value + '&' + input2.value;
@@ -391,8 +394,14 @@
       fillWithTexture(circle2, input2.value);
       window.location.hash = input1.value + '&' + input2.value;
     }
+
     input1.addEventListener('input', updateLeft);
     input2.addEventListener('input', updateRight)
+
+    // The input event is broken for input type=range in IE10
+    // (because why not), so fallback to change. Thanks IE10.
+    input1.addEventListener('change', updateLeft);
+    input2.addEventListener('change', updateRight)
 
     randomLeft.addEventListener('click', function() {
       input1.value = Math.floor((Math.random() * textures.length));
