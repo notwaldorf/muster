@@ -403,12 +403,12 @@
     input1.addEventListener('change', updateLeft);
     input2.addEventListener('change', updateRight)
 
-    randomLeft.addEventListener('click', function() {
+    randomLeft.addEventListener('click', function(event) {
       input1.value = Math.floor((Math.random() * textures.length));
       updateLeft();
       event.preventDefault();
     });
-    randomRight.addEventListener('click', function() {
+    randomRight.addEventListener('click', function(event) {
       input2.value = Math.floor((Math.random() * textures.length));
       updateRight();
       event.preventDefault();
