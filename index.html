@@ -1,0 +1,203 @@
+<html>
+<head>
+  <title>patterns!!!</title>
+
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta charset="utf-8">
+
+  <script src="bower_components/d3/d3.min.js"></script>
+  <script src="bower_components/textures/textures.min.js"></script>
+</head>
+<body>
+  <input id="input1" type="range" value="0" step="1" max="10">
+  <input id="input2" type="range" value="0" step="1" max="10">
+  <div id="example"></div>
+</body>
+
+<script>
+  var w = 200, h = 200;
+
+  var svg;
+  var circle1, circle2;
+  var textures;
+
+  svg = createSVG();
+  textures = createTextures();
+
+  circle1 = createCircle(1);
+  circle2 = createCircle(2);
+
+  fillWithTexture(circle1, 1);
+  input1.value = 1;
+  fillWithTexture(circle2, 0);
+
+  input1.max = input2.max = textures.length - 1;
+
+  input1.addEventListener('change', function(){
+    fillWithTexture(circle1, input1.value)
+  });
+  input2.addEventListener('change', function(){
+    fillWithTexture(circle2, input2.value)
+  });
+
+  function fillWithTexture(c, t) {
+    svg.call(textures[t]);
+    c.style.fill = textures[t].url();
+    // figure.transition().duration(1000).style("opacity",1);
+  }
+
+  function createSVG() {
+    var svg = d3.select("#example")
+        .append("svg")
+        .attr("width",w)
+        .attr("height", h);
+    return svg;
+  }
+
+  function createCircle(i) {
+    // Create the shape
+    var circle = svg.append("circle")
+      .attr({
+          "cx": w/2,
+          "cy": h/2,
+          "r": w/2-10,
+          id: 'circle' + i
+      })
+      .style({
+          "fill": textures[0].url(), // could have been "darkorange"
+          "stroke": "darkorange",
+          "stroke-width": 2
+      });
+    return document.getElementById('circle' + i);
+  }
+
+  function createTextures() {
+    var empty = textures.lines().size(0).strokeWidth(0);
+
+    var vertical = textures.lines()
+        .orientation("vertical")
+        .stroke("darkorange")   // .heavier .lighter
+        .size(10)               // 1 is the smallest
+        .strokeWidth(1)         // 2 is .thicker. can also have .thinner
+        .shapeRendering("crispEdges");
+
+    var horizontal = textures.lines()
+        .orientation("horizontal")
+        .stroke("darkorange")   // .heavier .lighter
+        .size(10)               // 1 is the smallest
+        .strokeWidth(1)         // 2 is .thicker. can also have .thinner
+        .shapeRendering("crispEdges");
+
+    var diagonal = textures.lines()
+        .orientation("diagonal")
+        .stroke("darkorange")   // .heavier .lighter
+        .size(10)               // 1 is the smallest
+        .strokeWidth(1)         // 2 is .thicker. can also have .thinner
+        .shapeRendering("crispEdges");
+
+    var grid = textures.lines()
+      .orientation("vertical", "horizontal")
+      .size(10)
+      .strokeWidth(1)
+      .shapeRendering("crispEdges")
+      .stroke("darkorange");
+
+    var diagonalGrid = textures.lines()
+      .orientation("2/8", "6/8")
+      .size(10)
+      .strokeWidth(1)
+      .shapeRendering("crispEdges")
+      .stroke("darkorange");
+
+    var fireGrid = textures.lines()
+      .orientation("2/8", "6/8")
+      .size(10)
+      .strokeWidth(1)
+      .stroke("firebrick")
+      .shapeRendering("crispEdges")
+      .background("darkorange");
+
+    var dots = textures
+      .circles()
+      .thicker()
+      .stroke("darkorange");
+
+    var dots1 = textures
+      .circles()
+      .complement()
+      .stroke("darkorange");
+
+    var dots2 = textures
+      .circles()
+      .stroke("darkorange")
+      .size(5);
+
+    var dots3 = textures.circles()
+    .radius(4)
+    .fill("transparent")
+    .strokeWidth(2)
+    .stroke("darkorange");
+
+    var dots4 = textures.circles()
+      .radius(4)
+      .fill("darkorange")
+      .strokeWidth(2)
+      .stroke("firebrick")
+      .complement();
+
+    var dots5 = textures.circles()
+      .radius(4)
+      .fill("darkorange")
+      .strokeWidth(2)
+      .stroke("firebrick")
+      .complement()
+      .background("darkorange");
+
+    var hexes = textures.paths()
+      .d("hexagons")
+      .size(8)
+      .strokeWidth(2)
+      .stroke("darkorange");
+
+    var exes = textures.paths()
+      .d("crosses")
+      .lighter()
+      .thicker()
+      .stroke("darkorange");
+
+    var woven = textures.paths()
+      .d("woven")
+      .lighter()
+      .thicker();
+
+    var waves = textures.paths()
+      .d("waves")
+      .thicker()
+      .stroke("darkorange");
+
+    var squares = textures.paths()
+      .d("squares")
+      .stroke("darkorange");
+
+    return [empty,
+        horizontal, vertical, grid, diagonal, diagonalGrid, fireGrid,
+        dots, dots1, dots2, dots3, dots4, dots5,
+        hexes, exes, woven, waves, squares];
+  }
+  //
+  // var i = 0;
+  // // Periodically set a random radius on each circle.
+  // function randomizeTexture(){
+  //   fillWithTexture(textures[i]);
+  //   i++;
+  //   if (i == textures.length) {
+  //     i = 0;
+  //   }
+  // }
+  //
+  // randomizeTexture();
+  // setInterval(randomizeTexture, 500);
+</script>
+</html>
