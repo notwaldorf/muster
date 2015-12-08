@@ -7,10 +7,10 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta charset="utf-8">
-  <script src="bower_components/d3/d3.min.js"></script>
-  <script src="bower_components/textures/textures.min.js"></script>
   <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="bower_components/paper-slider/paper-slider.html">
+  <script src="bower_components/d3/d3.min.js"></script>
+  <script src="bower_components/textures/textures.min.js"></script>
 
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Amatic+SC:700">
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:400">
@@ -44,10 +44,10 @@
     </div>
 
     <div class="horizontal">
-      <paper-slider id="input1" value="0" step="1" max="10"></paper-slider>
+      <paper-slider id="input1" step="1" min="0"></paper-slider>
       <div class="slider-spacer" style="background-color: #2196F3;"></div>
       <div class="slider-spacer" style="background-color: darkorange;"></div>
-      <paper-slider id="input2" value="0" step="1" max="10"></paper-slider>
+      <paper-slider id="input2" step="1" min="0"></paper-slider>
     </div>
 
     <div class="horizontal buttons">
@@ -76,10 +76,12 @@
   var circle1 = createCircle(0, r, 50);
   var circle2 = createCircle(1, r, 50);
   var textures = createTextures();
-  input1.max = input2.max = textures.length - 1;
 
-  loadOrResetState();
-  setupListeners();
+  document.addEventListener('WebComponentsReady', function() {
+    input1.max = input2.max = textures.length - 1;
+    setupListeners();
+    loadOrResetState();
+  })
 
 
   function fillWithTexture(c, t) {
@@ -438,7 +440,8 @@
       input2.value = Math.floor((Math.random() * textures.length));
       updateLeft(input1.value);
       updateRight(input2.value);
-      // On mobile the link stays hovered after being clicked
+
+      // On mobile the link stays hovered after being clicked, so fix that.
       this.className = 'button';
       event.preventDefault();
     });
